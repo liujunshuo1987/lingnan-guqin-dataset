@@ -17,7 +17,7 @@ def rep_year(period, dyn):
     return None
 
 def high_conf(status):
-    return status == 'verified' or status == 'auto(朝代+生卒吻合)'
+    return status in ('verified', 'auto(朝代+生卒吻合)', 'auto-地缘+朝代吻合')
 
 rows = list(csv.DictReader(open('persons_cbdb_linked.csv', encoding='utf-8-sig')))
 
