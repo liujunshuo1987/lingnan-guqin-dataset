@@ -67,6 +67,16 @@ PIECES = {
 """,
 }
 
+# 关键传谱人小传（韩畕据用户提供史料；杨表正据公认琴史）
+BIO = {
+ '韩畕': '字石耕，明遗民琴家。幼随父南迁，往来吴越，以琴名江左；擅《霹雳引》，时誉"直使山云怒飞，海水起立"。琴风源北曲、无固定节拍，与庄臻凤交好，庄赞其"一时无出其右"。性孤傲，拒为达官演奏，终身未娶，晚岁寄居兄家，生计清贫。诗文数百篇辑为《天樵集》（保管不善多散佚）。所传《忘机》《释谈章》由弟子程雄收入《西湖客话》等；程雄继其指法，为清初琴坛名家。死后有闽僧成忍千里求琴，足见其影响。',
+ '杨表正': '字本直，明代琴家，万历间在世。编刊《重修真传琴谱》（《正文对音捷要真传》，1585），主张为琴曲配词、以"正文对音"之法传谱，弘扬江派（江西谱系）琴学；其加词传谱影响《渔樵问答》等曲的流传。',
+}
+def bio_of(label):
+    for k, v in BIO.items():
+        if k in label: return v
+    return ''
+
 dyn_re = re.compile(r'^(宋代|明末清初|明末|明|清|民国|元|宋)')
 year_re = re.compile(r'(\d{4})')
 
@@ -99,7 +109,8 @@ def get_id(label):
         typ, dyn, year = node_meta(label)
         score_rows.append({'score_id': scores[label], '名称': label,
                            '类型': typ, '朝代': dyn, '年份': year,
-                           '是否悟雪山房': 'Y' if '悟雪山房' in label else ''})
+                           '是否悟雪山房': 'Y' if '悟雪山房' in label else '',
+                           '备注': bio_of(label)})
     return scores[label]
 
 for piece, block in PIECES.items():
@@ -111,7 +122,7 @@ for piece, block in PIECES.items():
                           '演变特征': feat.strip(), 'weight': w.strip()})
 
 with open('works_scores.csv', 'w', encoding='utf-8-sig', newline='') as f:
-    w = csv.DictWriter(f, fieldnames=['score_id','名称','类型','朝代','年份','是否悟雪山房'])
+    w = csv.DictWriter(f, fieldnames=['score_id','名称','类型','朝代','年份','是否悟雪山房','备注'])
     w.writeheader(); w.writerows(score_rows)
 with open('transmission_edges.csv', 'w', encoding='utf-8-sig', newline='') as f:
     w = csv.DictWriter(f, fieldnames=['曲名','source_id','source','target_id','target','演变特征','weight'])

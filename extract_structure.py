@@ -68,6 +68,17 @@ for p, d in pieces.items():
                 n['seg'] = v
                 break
 
+# 传谱人小传：从 works_scores.csv 备注列读入，挂到对应节点
+import os
+NAMEBIO = {}
+if os.path.exists('works_scores.csv'):
+    for w in csv.DictReader(open('works_scores.csv', encoding='utf-8-sig')):
+        if (w.get('备注') or '').strip():
+            NAMEBIO[w['名称']] = w['备注'].strip()
+for p, d in pieces.items():
+    for n in d['nodes'].values():
+        n['bio'] = NAMEBIO.get(n['name'], '')
+
 out = {}
 for p, d in pieces.items():
     nodes = list(d['nodes'].values())
