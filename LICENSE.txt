@@ -1,0 +1,18 @@
+岭南琴学数据集 / Lingnan Guqin Dataset
+Copyright (c) 2026 刘峻铄 (Liu Junshuo)
+
+本数据集（所有 .csv 数据文件及 README）以
+Creative Commons Attribution 4.0 International (CC-BY-4.0) 许可发布。
+You are free to share and adapt the material for any purpose, even commercially,
+provided you give appropriate credit.
+
+许可全文 / Full license text:
+https://creativecommons.org/licenses/by/4.0/legalcode
+
+致谢要求 / Attribution:
+引用时请注明作者刘峻铄及本数据集（见 CITATION.cff）。
+
+第三方数据 / Third-party data:
+`persons_cbdb_linked.csv` 中的 CBDB 编号、CBDB 姓名/朝代/生卒字段，
+源自 China Biographical Database (CBDB, https://cbdb.fas.harvard.edu/)，
+其再利用须另行遵循 CBDB 的使用条款并致谢 CBDB 项目。

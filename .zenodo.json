@@ -1,0 +1,23 @@
+{
+  "title": "岭南琴学数据集 / Lingnan Guqin Dataset: Persons, Networks, Geography, and Tablature Transmission in Ming–Qing Lingnan",
+  "upload_type": "dataset",
+  "access_right": "open",
+  "license": "CC-BY-4.0",
+  "description": "A structured, CBDB-aligned dataset of Guqin players and tablatures in Ming–Qing Lingnan (Guangdong). It contains a 226-person authority file with historical-geographic coordinates and computed social-network centrality, a 66-edge teacher–student / collegial network, and a 42-node / 50-edge tablature-transmission stemma for the four 'Gugang Yipu' pieces (Zuiyu Changwan, Bijian Liuquan, Yuqiao Wenda, Oulu Wangji). Person records are aligned to the China Biographical Database (CBDB) by name with dynasty/birth-death disambiguation. Derived from Liu Junshuo's doctoral dissertation on the literature and history of Guqin in Lingnan (Sun Yat-sen University, 2020). An interactive spatiotemporal map of the data is published at https://jeonshoeck.com/lingnan .",
+  "creators": [
+    { "name": "Liu, Junshuo", "affiliation": "Sun Yat-sen University" }
+  ],
+  "keywords": [
+    "Guqin", "古琴", "Lingnan", "岭南琴派", "digital humanities",
+    "prosopography", "social network analysis", "historical GIS",
+    "CBDB", "悟雪山房琴谱", "古冈遗谱"
+  ],
+  "related_identifiers": [
+    {
+      "relation": "isDerivedFrom",
+      "identifier": "https://cbdb.fas.harvard.edu/",
+      "scheme": "url",
+      "resource_type": "dataset"
+    }
+  ]
+}

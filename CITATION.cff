@@ -1,0 +1,43 @@
+cff-version: 1.2.0
+message: "If you use this dataset, please cite it as below."
+title: "岭南琴学数据集 / Lingnan Guqin Dataset: Persons, Networks, Geography, and Tablature Transmission in Ming–Qing Lingnan"
+abstract: >-
+  A structured, CBDB-aligned dataset of Guqin (Chinese seven-string zither) players
+  and tablatures in Ming–Qing Lingnan (Guangdong). Includes a 226-person authority
+  file with coordinates and computed network centrality, a 66-edge social network,
+  and a 42-node / 50-edge tablature-transmission stemma for the four "Gugang Yipu"
+  pieces. Derived from Liu Junshuo's doctoral dissertation on Lingnan Guqin
+  literature and history (Sun Yat-sen University, 2020).
+type: dataset
+authors:
+  - family-names: "刘"
+    given-names: "峻铄"
+    alias: "Liu Junshuo"
+    email: liujunshuo1987@gmail.com
+    affiliation: "Sun Yat-sen University (中山大学)"
+keywords:
+  - Guqin
+  - 古琴
+  - Lingnan
+  - 岭南琴派
+  - digital humanities
+  - prosopography
+  - social network analysis
+  - CBDB
+  - 悟雪山房琴谱
+version: "1.0.0"
+date-released: "2026-06-28"
+license: CC-BY-4.0
+references:
+  - type: database
+    title: "China Biographical Database (CBDB)"
+    url: "https://cbdb.fas.harvard.edu/"
+    notes: "Person identifiers in the CBDB columns are aligned to this database."
+  - type: thesis
+    title: "嶺南琴學文獻與琴史研究 (A Study of the Literature and History of Guqin in Lingnan)"
+    authors:
+      - family-names: "刘"
+        given-names: "峻铄"
+    institution:
+      name: "中山大学 (Sun Yat-sen University)"
+    year: 2020
