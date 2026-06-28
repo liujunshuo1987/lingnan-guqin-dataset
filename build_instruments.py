@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """名琴流传谱系：instruments.csv（器物权威表，第三类实体）+ 站点 instruments.json。
-每行 = 一段(琴, 持有者/制者)流转；seq 为流转次序。绿绮台/南风为多手链，余为单手。"""
+每行 = 一段(琴, 持有者/制者)流转；含出处、琴铭、题咏(均据史料，未列者留空不臆补)。"""
 import csv, json, os
 
-# (琴名, seq, 持有者, 时期, 近似年, 行为, 出处, 备注)
+# (琴名, 流转序, 持有者, 时期, 近似年, 行为, 出处, 备注)
 ROWS = [
  ('绿绮台',1,'唐·武德年间','唐',620,'斫制','《广东新语》《绿绮台记》','相传制自唐武德年间'),
  ('绿绮台',2,'明武宗','明',1515,'御琴','《广东新语》','明武宗御用之琴'),
@@ -15,12 +15,13 @@ ROWS = [
  ('南风',1,'宋理宗','南宋',1240,'旧物','《广东新语》','宋理宗旧物'),
  ('南风',2,'邝露','明末清初',1650,'珍藏','《广东新语》','与绿绮台并为邝露二琴'),
  ('南风',3,'（亡佚）','清初',1660,'不知所踪','《广东新语》','邝露殉国后南风不知所踪'),
+ ('飞泉',1,'陈献章','明',1480,'斫藏·镌铭','《越台杂记》','白沙先生所蓄古琴'),
+ ('文山琴',1,'徐啸三','清',1865,'旧藏','《逸农笔记》','断纹蛇皮，传宋文天祥遗物；兵燹后不知所踪'),
  ('震北雷',1,'罗宝珍','北宋',1100,'自斫','《五山志林》','道士自斫一琴名"震北雷"'),
- ('飞泉',1,'陈献章','明',1480,'镌名','《越台杂记》','古琴镌篆书"飞泉"二字'),
  ('龙唇',1,'孙蕡','明',1380,'旧藏','《历代岭南琴人知见录》','有"龙唇"琴'),
  ('风雷吼',1,'伍瑞隆','明',1640,'遗琴','事迹','晚卜筑鸠艾山，遗有明琴"风雷吼"'),
  ('都梁',1,'薛始亨','明末清初',1660,'斫制','事迹','遗民，入罗浮山斫"都梁"琴'),
- ('六莹',1,'梁佩兰','清',1680,'得藏','事迹','得苏轼"六莹琴"并以琴名堂'),
+ ('六莹',1,'梁佩兰','清',1680,'得藏','事迹','得苏轼"六莹琴"并以"六莹"名其堂'),
  ('仪凤丙子',1,'王利亨','清',1795,'购藏','事迹','购得唐代"仪凤丙子"御琴'),
  ('帘泉',1,'黎简','清',1780,'珍藏','事迹','藏"帘泉"琴，有大量琴诗'),
  ('秋梧',1,'何凤','清',1813,'购藏','事迹','购得"秋梧"以为号'),
@@ -35,28 +36,43 @@ ROWS = [
  ('八极隐',1,'卢家炳','民国',1930,'旧藏','事迹','中山大学教授，旧藏"八极隐"'),
  ('伴云',1,'邓尔雅','民国',1925,'珍藏','事迹','珍藏明代名琴"伴云琴"'),
 ]
-COLS = ['琴名','流转序','持有者','时期','近似年','行为','出处','备注']
-with open('instruments.csv','w',encoding='utf-8-sig',newline='') as f:
-    w = csv.writer(f); w.writerow(COLS); w.writerows(ROWS)
 
-# 站点 json：按琴分组、按序排
-ins = {}
+# 琴铭 / 题咏（据史料补；键＝(琴名,持有者)）
+ENRICH = {
+ ('绿绮台','邝露'): {'题咏':'邝露抱琴殉国，后人衍生琴歌：「抱琴而死兮当告谁，吁嗟琴兮当知之」'},
+ ('绿绮台','叶犹龙'): {'题咏':'时人赎琴诗：「叹君高义赎兹琴，黄金如山难比心；我友忠魂今有托，先朝法物不同沉」'},
+ ('绿绮台','邓尔雅'): {'题咏':'邓尔雅作《绿绮台记》，详记此琴历世流转'},
+ ('飞泉','陈献章'): {'琴铭':'镌篆书「飞泉」二字、行书「弘治辛亥，白沙氏修」八字（陈白沙手迹）'},
+ ('文山琴','徐啸三'): {'琴铭':'琴背镌七绝：「松风一榻雨潇潇，万里封疆不寂寥。独抱瑶琴远尘虑，君恩犹恐壮怀消」，款「文山」'},
+ ('仪凤丙子','王利亨'): {'题咏':'黄钊为之作《琴歌》'},
+ ('都梁','薛始亨'): {'题咏':'薛始亨为之著《琴赋》'},
+ ('六莹','梁佩兰'): {'题咏':'本苏轼旧物，梁佩兰以「六莹」名其堂'},
+}
+
+COLS = ['琴名','流转序','持有者','时期','近似年','行为','出处','备注','琴铭','题咏']
+rows_out = []
 for r in ROWS:
-    name,seq,holder,era,yr,act,src,note = r
-    d = ins.setdefault(name, {'name':name,'source':src,'owners':[]})
+    name, seq, holder = r[0], r[1], r[2]
+    en = ENRICH.get((name, holder), {})
+    rows_out.append(list(r) + [en.get('琴铭',''), en.get('题咏','')])
+with open('instruments.csv','w',encoding='utf-8-sig',newline='') as f:
+    w = csv.writer(f); w.writerow(COLS); w.writerows(rows_out)
+
+ins = {}
+for r in rows_out:
+    name,seq,holder,era,yr,act,src,note,ming,tiy = r
+    d = ins.setdefault(name, {'name':name,'owners':[]})
     d['owners'].append({'holder':holder,'era':era,'year':yr,'action':act,'note':note,
-                        'peak': holder=='邝露' and '殉国' in act})
+                        'src':src,'ming':ming,'tiy':tiy,'peak': holder=='邝露' and '殉国' in act})
 for d in ins.values():
     d['owners'].sort(key=lambda o:o['year'])
 arr = sorted(ins.values(), key=lambda d:(-len(d['owners']), d['owners'][0]['year']))
-out = {'instruments': arr}
-json.dump(out, open('/tmp/instruments.json','w',encoding='utf-8'), ensure_ascii=False)
-site = '/Users/sx/个人主页/app/lingnan'
+json.dump({'instruments':arr}, open('/tmp/instruments.json','w',encoding='utf-8'), ensure_ascii=False)
+site='/Users/sx/个人主页/app/lingnan'
 if os.path.isdir(site):
-    json.dump(out, open(os.path.join(site,'instruments.json'),'w',encoding='utf-8'), ensure_ascii=False)
+    json.dump({'instruments':arr}, open(os.path.join(site,'instruments.json'),'w',encoding='utf-8'), ensure_ascii=False)
 
-n_multi = sum(1 for d in arr if len(d['owners'])>1)
-print('器物表: %d 琴 / %d 流转行；多手链 %d (绿绮台%d手、南风%d手)' % (
-    len(arr), len(ROWS), n_multi,
-    len(ins['绿绮台']['owners']), len(ins['南风']['owners'])))
-print('写入 instruments.csv + 站点 instruments.json')
+ne=sum(1 for r in rows_out if r[8] or r[9])
+print('器物表 %d 琴 / %d 行；含琴铭或题咏 %d 行' % (len(arr), len(rows_out), ne))
+for r in rows_out:
+    if r[8] or r[9]: print('  ·', r[0], r[2], '|', (r[8] or r[9])[:34]+'…')

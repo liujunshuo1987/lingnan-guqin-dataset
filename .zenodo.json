@@ -1,7 +1,7 @@
 {
   "title": "岭南琴学数据集 / Lingnan Guqin Dataset: Persons, Networks, Geography, and Tablature Transmission in Ming–Qing Lingnan",
   "upload_type": "dataset",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "access_right": "open",
   "license": "CC-BY-4.0",
   "description": "A structured, CBDB-aligned dataset of Guqin players and tablatures in Ming–Qing Lingnan (Guangdong). It contains a 226-person authority file with historical-geographic coordinates and computed social-network centrality, a 66-edge teacher–student / collegial network, and a 42-node / 50-edge tablature-transmission stemma for the four 'Gugang Yipu' pieces (Oulu Wangji 鸥鹭忘机, Huaigu 懷古, Bijian Liuquan 碧涧流泉, Yuqiao Wenda 渔樵问答). A third authority entity (instruments) traces the provenance of famous named qin zithers (e.g. the Lvqitai across eight centuries, via the martyr Kuang Lu). Person records are aligned to the China Biographical Database (CBDB) by name with dynasty/birth-death disambiguation. Derived from Liu Junshuo's doctoral dissertation on the literature and history of Guqin in Lingnan (Sun Yat-sen University, 2020). An interactive spatiotemporal map of the data is published at https://jeonshoeck.com/lingnan .",
