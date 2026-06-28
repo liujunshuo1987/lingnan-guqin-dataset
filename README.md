@@ -1,5 +1,10 @@
 # 岭南琴学数据集 / Lingnan Guqin Dataset
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20995533.svg)](https://doi.org/10.5281/zenodo.20995533)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+
+交互式时空地图 → **https://jeonshoeck.com/lingnan**
+
 明清岭南古琴琴人与琴谱的结构化数据集，含**人物权威表、社会网络、历史地理坐标、琴谱传承谱系**，并对接 [CBDB 中国历代人物传记资料库](https://cbdb.fas.harvard.edu/)。底层考据出自刘峻铄博士论文《嶺南琴學文獻與琴史研究》（中山大学，2020）。
 
 > A structured dataset of Guqin players and tablatures in Ming–Qing Lingnan (Guangdong): a person authority file, a social network, historical-geographic coordinates, and a tablature-transmission stemma, aligned to the China Biographical Database (CBDB).

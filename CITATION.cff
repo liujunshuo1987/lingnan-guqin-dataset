@@ -1,6 +1,11 @@
 cff-version: 1.2.0
 message: "If you use this dataset, please cite it as below."
 title: "岭南琴学数据集 / Lingnan Guqin Dataset: Persons, Networks, Geography, and Tablature Transmission in Ming–Qing Lingnan"
+doi: 10.5281/zenodo.20995533
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.20995533
+    description: "Zenodo deposit (v1.0.0)"
 abstract: >-
   A structured, CBDB-aligned dataset of Guqin (Chinese seven-string zither) players
   and tablatures in Ming–Qing Lingnan (Guangdong). Includes a 226-person authority
